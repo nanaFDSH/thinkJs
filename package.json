@@ -1,0 +1,52 @@
+{
+  "name": "koa-thinkjs",
+  "description": "使用thinkjs",
+  "version": "1.0.0",
+  "author": "wnn",
+  "scripts": {
+    "start": "node development.js",
+    "lint": "eslint src/",
+    "lint-fix": "eslint --fix src/"
+  },
+  "dependencies": {
+    "captchapng": "0.0.1",
+    "think-cache": "^1.0.0",
+    "think-cache-file": "^1.0.8",
+    "think-cache-redis": "^1.1.2",
+    "think-logger3": "^1.0.0",
+    "think-model": "^1.0.0",
+    "think-model-mysql": "^1.0.0",
+    "think-mongo": "^1.0.5",
+    "think-session": "^1.0.0",
+    "think-session-file": "^1.0.5",
+    "think-view": "^1.0.0",
+    "think-view-nunjucks": "^1.0.1",
+    "thinkjs": "^3.0.0"
+  },
+  "devDependencies": {
+    "think-watcher": "^3.0.0",
+    "eslint": "^4.2.0",
+    "eslint-config-think": "^1.0.0",
+    "ava": "^0.18.0",
+    "nyc": "^7.0.0"
+  },
+  "repository": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "readmeFilename": "README.md",
+  "thinkjs": {
+    "metadata": {
+      "name": "koa-thinkjs",
+      "description": "(thinkjs",
+      "author": "wnn",
+      "babel": false
+    },
+    "projectName": "koa-thinkjs",
+    "templateName": "C:\\Users\\wnn\\AppData\\Roaming\\npm\\node_modules\\think-cli\\default_template",
+    "cacheTemplatePath": "C:\\Users\\wnn\\.think-templates\\C--Users-wnn-AppData-Roaming-npm-node_modules-think-cli-default_template",
+    "clone": false,
+    "isMultiModule": false
+  }
+}
