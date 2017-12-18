@@ -31,10 +31,13 @@
       <ul class="nav navbar-nav">
         <li role="presentation" class="active"><a href="/">首页</a></li>
         <li role="presentation"><a href="/list/list">分数表</a></li>
+        <li role="presentation"><a href="/user/message">用户表</a></li>
+        <li role="presentation"><a href="/upload">图片上传</a></li>
         <li role="presentation">
           {% if isLogin == 0 %}
           <a href="/user/login">登录</a>
           {% else %}
+          我是{{name}}
           <a href="/user/logout">退出登录</a>
           {% endif %}
         </li>
