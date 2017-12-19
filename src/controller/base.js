@@ -5,6 +5,7 @@ module.exports = class extends think.Controller {
     if(typeof sess_name == 'undefined'){
       this.assign('isLogin', '0'); //给模板赋值
     }else{
+      this.assign('name', sess_name); //给模板赋值
       this.assign('isLogin', '1'); //给模板赋值
     }
   }

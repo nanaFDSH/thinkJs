@@ -38,7 +38,17 @@ module.exports = class extends Base {
   // 退出登录
   async logoutAction() {
     await this.session(null);
+    await this.cookie('thinkjs', null)
     this.ctx.redirect('/list/list'); // 重定向
   }
 
+  // 用户信息
+  async messageAction() {
+    const data = await this.model('users').select();
+    console.log(data)
+    this.assign('data', data); //给模板赋值
+    //this.assign('title', '用户页面'); //给模板赋值
+
+    return this.display();
+  }
 };
