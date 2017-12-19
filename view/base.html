@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+        .my-navbar {
+            transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+            background:#33cccc;
+        }
+        .my-navbar a{
+            background:transparent !important;
+            color:#fff !important
+        }
+        .my-navbar a:hover {
+            color:#000 !important;
+            background:transparent;outline:0
+        }
+        .my-navbar a {
+            transition: color 0.5s ease-in-out;
+        }/*-webkit-transition ;-moz-transition*/
+        .top-nav {
+            padding:0;
+            /*background:#000;*/
+        }
+        button.navbar-toggle {
+            background-color:#fbfbfb;
+        }/*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/
+        button.navbar-toggle > span.icon-bar {
+            background-color:#dedede
+        }
+    </style>
+    <!--<link rel="stylesheet" href="/static/css/styles.css">-->
+    <script>
+        $(window).scroll(function () {
+            if ($(".navbar").offset().top > 50) {$(".navbar-fixed-top").addClass("top-nav");
+            }else {$(".navbar-fixed-top").removeClass("top-nav");}
+        })
+    </script>
+</head>
+<body>
+<nav class="navbar my-navbar" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">thinkJs</a>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav" id="myTabs">
+                <li role="presentation" class="active"><a href="/">首页</a></li>
+                <li role="presentation"><a href="/list/list">分数表</a></li>
+                <li role="presentation"><a href="/article/index">添加文章</a></li>
+                <li role="presentation">
+                    {% if isLogin == 0 %}
+                    <a href="/user/login">登录</a>
+                    {% else %}
+                    <a href="/user/logout">退出登录</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block main %} {% endblock %}
+
+</body>
+</html>

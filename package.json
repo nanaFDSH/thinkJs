@@ -21,7 +21,8 @@
     "think-session-file": "^1.0.5",
     "think-view": "^1.0.0",
     "think-view-nunjucks": "^1.0.1",
-    "thinkjs": "^3.0.0"
+    "thinkjs": "^3.0.0",
+    "vm-markdown": "^0.2.8"
   },
   "devDependencies": {
     "think-watcher": "^3.0.0",

@@ -1,0 +1,73 @@
+{
+  "port": 8360,
+  "workers": 1,
+  "stickyCluster": false,
+  "startServerTimeout": 3000,
+  "reloadSignal": "SIGUSR2",
+  "processKillTimeout": 10000,
+  "jsonpCallbackField": "callback",
+  "jsonContentType": "application/json",
+  "jsonpContentType": "application/javascript",
+  "errnoField": "errno",
+  "errmsgField": "errmsg",
+  "defaultErrno": 1000,
+  "validateDefaultErrno": 1001,
+  "cache": {
+    "type": "redis",
+    "redis": {
+      "timeout": 86400000,
+      "port": 6379,
+      "host": "127.0.0.1",
+      "password": "123456"
+    }
+  },
+  "model": {
+    "type": "mysql",
+    "mysql": {
+      "logConnect": true,
+      "logSql": true,
+      "database": "koa",
+      "prefix": "",
+      "encoding": "utf8",
+      "host": "127.0.0.1",
+      "port": "3306",
+      "user": "root",
+      "password": "123456",
+      "dateStrings": true
+    }
+  },
+  "session": {
+    "type": "file",
+    "file": {
+      "cookie": {
+        "name": "thinkjs"
+      },
+      "sessionPath": "E:\\old_www\\thinkJs\\runtime\\session"
+    }
+  },
+  "view": {
+    "type": "nunjucks",
+    "nunjucks": {
+      "viewPath": "E:\\old_www\\thinkJs\\view",
+      "sep": "_",
+      "extname": ".html"
+    }
+  },
+  "logger": {
+    "type": "console",
+    "console": {},
+    "file": {
+      "backups": 10,
+      "absolute": true,
+      "maxLogSize": 51200,
+      "filename": "E:\\old_www\\thinkJs\\logs\\app.log"
+    },
+    "dateFile": {
+      "level": "ALL",
+      "absolute": true,
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": true,
+      "filename": "E:\\old_www\\thinkJs\\logs\\app.log"
+    }
+  }
+}

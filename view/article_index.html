@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% block main %}
+<style>
+    #container {
+        overflow: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 100px;
+    }
+    #editor-column,
+    #preview-column {
+        width: 49.5%;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+        background-color: #fff;
+    }
+    .pull-left {
+        float: left;
+    }
+
+    .pull-right {
+        float: right;
+    }
+</style>
+<div>
+    <h2>{{title}}</h2>
+</div>
+
+<link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
+<script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
+<script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>
+
+<div class="container">
+    <div class="editor-wrapper">
+        <!--<input class="title" type="text" placeholder="Title" />-->
+
+        <div id="toolbar"></div>
+        <div id="container">
+            <div id="editor-column" class="pull-left">
+                <div id="panel-editor">
+                    <textarea id="editor" placeholder="Content here ...."></textarea>
+                </div>
+            </div>
+            <div id="preview-column" class="pull-right">
+                <div id="panel-preview">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- only required for loading sample markdown into the textarea -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $('#editor').load('markdown.md',
+            function(data) {
+                var editor = new Editor();
+                editor.render();
+            }
+        );
+
+        // function Editor(input, preview) {
+        //     this.update = function () {
+        //         preview.innerHTML = markdown.toHTML(input.value);
+        //     };
+        //     input.editor = this;
+        //     this.update();
+        // }
+        // var $ = function (id) { return document.getElementById(id); };
+        // new Editor($("text-input"), $("panel-preview"));
+
+    });
+
+</script>
+{% endblock %}
