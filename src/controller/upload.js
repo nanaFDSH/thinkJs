@@ -1,10 +1,8 @@
 const Base = require('./base.js');
 
-module.exports = class extends think.Controller {
+module.exports = class extends Base {
     async indexAction() {
-
-
-        this.assign('title', '图片上传'); //给模板赋值
+        this.assign('title', '鍥剧墖涓婁紶');
         return this.display();
     }
 }

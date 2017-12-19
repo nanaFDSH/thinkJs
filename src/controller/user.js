@@ -9,6 +9,7 @@ module.exports = class extends Base {
       return this.display()
     }else if(this.method == 'POST'){
 
+      // 获取存储的验证码
       const code = await this.session('code');
 
       if(this.ctx.request.body.post.code != code){
@@ -21,8 +22,8 @@ module.exports = class extends Base {
 
         let res = await this.model('users').where({name: name,password:password}).select();
 
+        // 查不到数据 内容为空时的处理
         if(think.isEmpty(res)) {
-          // 查不到数据 内容为空时的处理
           this.assign('errorMsg','用户名或密码错误');
           this.display();
         }else{
@@ -37,18 +38,23 @@ module.exports = class extends Base {
 
   // 退出登录
   async logoutAction() {
+    // session cookie 均设置为空
     await this.session(null);
     await this.cookie('thinkjs', null)
-    this.ctx.redirect('/list/list'); // 重定向
+    this.ctx.redirect('/'); // 重定向
   }
 
-  // 用户信息
+  // 获取当前用户信息
   async messageAction() {
-    const data = await this.model('users').select();
+    const name = await this.session('name');
+    const data = await this.model('users').where({name: name}).select();
     console.log(data)
-    this.assign('data', data); //给模板赋值
-    //this.assign('title', '用户页面'); //给模板赋值
-
+    this.assign('data', data[0]); //给模板赋值
     return this.display();
+  }
+
+  // 用户信息注册
+  async registered(){
+
   }
 };

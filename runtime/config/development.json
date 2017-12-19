@@ -42,13 +42,13 @@
       "cookie": {
         "name": "thinkjs"
       },
-      "sessionPath": "E:\\old_www\\thinkJs\\runtime\\session"
+      "sessionPath": "C:\\koa-thinkjs\\runtime\\session"
     }
   },
   "view": {
     "type": "nunjucks",
     "nunjucks": {
-      "viewPath": "E:\\old_www\\thinkJs\\view",
+      "viewPath": "C:\\koa-thinkjs\\view",
       "sep": "_",
       "extname": ".html"
     }
@@ -60,14 +60,14 @@
       "backups": 10,
       "absolute": true,
       "maxLogSize": 51200,
-      "filename": "E:\\old_www\\thinkJs\\logs\\app.log"
+      "filename": "C:\\koa-thinkjs\\logs\\app.log"
     },
     "dateFile": {
       "level": "ALL",
       "absolute": true,
       "pattern": "-yyyy-MM-dd",
       "alwaysIncludePattern": true,
-      "filename": "E:\\old_www\\thinkJs\\logs\\app.log"
+      "filename": "C:\\koa-thinkjs\\logs\\app.log"
     }
   }
 }

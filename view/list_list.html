@@ -1,6 +1,46 @@
 {% extends "base.html" %} {% block main %}
 
 <script>
+    // 修改
+    function update(id){
+        console.log(id)
+        $.post('/list/update',{id:id},function(res){
+            if(res.code === '0') {
+                console.log(res.data)
+                data = res.data
+                $('#c_id').val(data.id)
+                $('#c_name').val(data.name)
+                $('#c_math').val(data.mathematics)
+                $('#c_chinese').val(data.chinese)
+                $('#c_english').val(data.english)
+                $('#c_score').val(data.score)
+                $('#c_mobile').val(data.mobile)
+            }
+        });
+        $('#updateModal').modal('show')
+    }
+
+    // 提交修改
+    function submintUpdate(){
+        var user = {
+            id : $('#c_id').val(),
+            name: $('#c_name').val(),
+            mathematics: $('#c_math').val(),
+            chinese: $('#c_chinese').val(),
+            english:$('#c_english').val(),
+            score:$('#c_score').val(),
+            mobile:$('#c_mobile').val()
+        }
+        console.log(user)
+        $.post('/list/submitUpdate',user,function(res){
+            if(res.code === '0') {
+                alert('修改成功!')
+                location.reload()
+            }
+        });
+    }
+
+    // 删除
     function userDelete(id){
         console.log(id)
         if(confirm('你确定要删除吗')){
@@ -16,7 +56,7 @@
     }
 </script>
 <div class="container">
-    <button class="btn btn-info" data-toggle="modal" data-target="#myModal">增加数据</button>
+    <button class="btn btn-info list-add-btn" data-toggle="modal" data-target="#myModal">增加数据</button>
 
     <table class="table table-bordered">
         <thead>
@@ -42,7 +82,7 @@
             <td>{{ user.score }}</td>
             <td>{{ user.mobile }}</td>
             <td>
-                <!--<button class="btn btn-info" onclick="updateDelete({{user.id}})">编辑</button>-->
+                <button class="btn btn-info" onclick="update({{user.id}})">编辑</button>
                 <button class="btn btn-danger" onclick="userDelete({{user.id}})">删除</button>
             </td>
         </tr>
@@ -50,54 +90,56 @@
         </tbody>
     </table>
 
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
+    <div class="list-navigation">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
 
-            <li class="pagination-item"><a href="/list/list?page=1">首页</a></li>
+                <li class="pagination-item"><a href="/list/list?page=1">首页</a></li>
 
-            {% if data.currentPage > 1 %}
-            <li>
-                <a href="/list/list?page={{data.currentPage-1}}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            {%endif%}
+                {% if data.currentPage > 1 %}
+                <li>
+                    <a href="/list/list?page={{data.currentPage-1}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {%endif%}
 
-            {% if data.currentPage <= 3 %}
-            {% for i in range(1,data.currentPage+1) %}
-            <li class="pagination-item {%if data.currentPage==i %}active{%endif%}"><a href="/list/list?page={{i}}">{{i}}</a></li>
-            {% endfor %}
-            {%endif%}
+                {% if data.currentPage <= 3 %}
+                {% for i in range(1,data.currentPage+1) %}
+                <li class="pagination-item {%if data.currentPage==i %}active{%endif%}"><a href="/list/list?page={{i}}">{{i}}</a></li>
+                {% endfor %}
+                {%endif%}
 
-            {% if data.currentPage > 3 %}
+                {% if data.currentPage > 3 %}
                 <li class="pagination-item"><a href="#">...</a></li>
                 {% for i in range(data.currentPage-2,data.currentPage+1) %}
                 <li class="pagination-item {%if data.currentPage==i %}active{%endif%}"><a href="/list/list?page={{i}}">{{i}}</a></li>
                 {% endfor %}
-            {%endif%}
+                {%endif%}
 
-            {% if data.currentPage < data.totalPages-3 %}
-            {% for i in range(data.currentPage+1,data.currentPage+3) %}
-            <li class="pagination-item {%if data.currentPage==i %}active{%endif%}"><a href="/list/list?page={{i}}">{{i}}</a></li>
-            {% endfor %}
-            <li class="pagination-item"><a href="#">...</a></li>
-            {%endif%}
+                {% if data.currentPage < data.totalPages-3 %}
+                {% for i in range(data.currentPage+1,data.currentPage+3) %}
+                <li class="pagination-item {%if data.currentPage==i %}active{%endif%}"><a href="/list/list?page={{i}}">{{i}}</a></li>
+                {% endfor %}
+                <li class="pagination-item"><a href="#">...</a></li>
+                {%endif%}
 
-            {% if data.currentPage < data.totalPages %}
-            <li>
-                <a href="/list/list?page={{data.currentPage+1}}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-            {%endif%}
+                {% if data.currentPage < data.totalPages %}
+                <li>
+                    <a href="/list/list?page={{data.currentPage+1}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {%endif%}
 
-            <li class="pagination-item"><a href="/list/list?page={{data.totalPages}}}">尾页</a></li>
+                <li class="pagination-item"><a href="/list/list?page={{data.totalPages}}}">尾页</a></li>
 
-        </ul>
-    </nav>
-    <span class="count">共 {{data.totalPages}} 页</span>
+            </ul>
+        </nav>
+        <span class="count">共 {{data.totalPages}} 页</span>
+    </div>
 
-    <!-- Modal -->
+    <!-- 添加 Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -152,39 +194,93 @@
             </div>
         </div>
     </div>
+
+    <!-- 修改-->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="updateModalLabel">修改数据</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group" style="display: none">
+                            <label for="c_id" class="col-sm-2 control-label">名字</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="c_id" placeholder="请添加名字">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c_name" class="col-sm-2 control-label">名字</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="c_name" placeholder="请添加名字">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c_math" class="col-sm-2 control-label">数学</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="c_math" placeholder="请添加数学分数">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c_chinese" class="col-sm-2 control-label">语文</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="c_chinese" placeholder="请添加语文分数">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c_english" class="col-sm-2 control-label">英语</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="c_english" placeholder="请添加英语分数">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c_score" class="col-sm-2 control-label">总分数</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="c_score" placeholder="请添加总分数">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c_mobile" class="col-sm-2 control-label">手机号</label>
+                            <div class="col-sm-10">
+                                <input type="tel" maxlength="11" class="form-control" id="c_mobile" placeholder="请添加手机号">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="submintUpdate()">确认添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+<script>
+    $(function(){
+        // 添加
+        function add(){
+            var user = {
+                name: $('#u_name').val(),
+                mathematics: $('#u_math').val(),
+                chinese: $('#u_chinese').val(),
+                english:$('#u_english').val(),
+                score:$('#u_score').val(),
+                mobile:$('#u_mobile').val()
+            }
+            console.log(user)
+            $.post('/list/add',user,function(res){
+                if(res.code === '0') {
+                    alert('添加成功!')
+                    location.reload()
+                }
+            });
+        }
+
+
+    });
+</script>
 {% endblock %}
 
-<script>
-$(function(){
-
-//    function getList(){
-//        $.post('/list/list',{id:id},function(res){
-//            if(res.code === '0') {
-//                console.log(res.data)
-//            }
-//        });
-//    }
-//    getList()
-
-
-
-    function add(){
-        var user = {
-            name: $('#u_name').val(),
-            mathematics: $('#u_math').val(),
-            chinese: $('#u_chinese').val(),
-            english:$('#u_english').val(),
-            score:$('#u_score').val(),
-            mobile:$('#u_mobile').val()
-        }
-        console.log(user)
-        $.post('/list/add',user,function(res){
-            if(res.code === '0') {
-                alert('添加成功!')
-                location.reload()
-            }
-        });
-    }
-});
-</script>

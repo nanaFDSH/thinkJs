@@ -1,7 +1,7 @@
 const Base = require('./base.js');
 
 module.exports = class extends think.Controller {
-    // …Ë÷√readis
+    // ËÆæÁΩÆreadis
     async indexAction() {
         await this.cache('name', 'value', {
             type: 'redis',
@@ -11,9 +11,9 @@ module.exports = class extends think.Controller {
         });
     }
 
-    // ªÒ»°readis
+    // Ëé∑Âèñreadis
     async getAction() {
-        const data = await this.cache('dawangba');
+        const data = await this.cache('www');
         console.log(data)
     }
 }

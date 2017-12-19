@@ -1,0 +1,83 @@
+
+.content{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+header{
+    line-height: 80px;
+    height: 80px;
+    padding: 0 20px;
+    background-color: rgb(64, 158, 255);
+}
+.wrap{
+    display: flex;
+    flex: 1;
+}
+.aside{
+    width: 230px;
+    min-height: 100%;
+    border-right: 1px solid #ddd;
+}
+.right-continer{
+    flex: 1;
+}
+
+/*上边*/
+.logo{
+    width: 210px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 24px;
+    color: #fff;
+    float: left;
+}
+.logo a{
+    color: #fff;
+    text-decoration: none;
+}
+.user-info{
+    float: right;
+    color: #fff;
+    padding-right: 30px;
+}
+.user-info a{
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+/*左边*/
+.menu{
+    margin: 0;
+    padding: 0;
+}
+.menu li{
+    list-style: none;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+}
+.menu li:hover{
+    background-color: rgb(235,245,255);
+    cursor:pointer
+}
+.menu li a{
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    color: #409eff;
+    text-decoration: none;
+}
+
+/*列表页*/
+.list-add-btn{
+    margin: 10px 0;
+}
+.list-navigation nav{
+    float: right;
+}
+.list-navigation .count{
+    float: left;
+    margin: 20px 0;
+    padding: 6px 0;
+}

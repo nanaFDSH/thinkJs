@@ -1,6 +1,7 @@
 const Base = require('./base.js');
 
 module.exports = class extends Base {
+    // 获取列表接口
     async listAction()
     {
         const user = this.model('list'); // controller 里实例化模型
@@ -13,6 +14,7 @@ module.exports = class extends Base {
         return this.display();
     }
 
+    // 删除某条数据
     async deleteAction()
     {
         var id = this.ctx.request.body.post.id
@@ -31,6 +33,7 @@ module.exports = class extends Base {
         };
     }
 
+    // 添加数据
     async addAction()
     {
         var user = this.ctx.request.body.post
@@ -42,4 +45,26 @@ module.exports = class extends Base {
         };
     }
 
+    // 修改数据
+    async updateAction()
+    {
+        var id = this.ctx.request.body.post.id
+
+        const data = await this.model('list').where({id:id}).select();
+        console.log(data)
+        this.body = {
+            code : '0',
+            data : data[0]
+        };
+    }
+
+    async submitUpdateAction()
+    {
+        var user = this.ctx.request.body.post
+        console.log(user)
+        const data = await  this.model('list').where({id: user.id}).update(user);
+        this.body = {
+            code : '0'
+        };
+    }
 };

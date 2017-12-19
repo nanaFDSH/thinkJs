@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-{{data[0].headImg}}
-<img src="{{data[0].headImg}}">
-</body>
-</html>
+{% extends "base.html" %} {% block main %}
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">头像</label>
+        <div class="col-sm-10">
+            <p class="form-control-static">
+                <img src="{{data.headImg}}">
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">姓名</label>
+        <div class="col-sm-10">
+            <p class="form-control-static">{{data.name}}</p>
+        </div>
+    </div>
+
+</form>
+{% endblock %}
