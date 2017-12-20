@@ -29,10 +29,10 @@
       "database": "koa",
       "prefix": "",
       "encoding": "utf8",
-      "host": "127.0.0.1",
+      "host": "www.hijs.cc",
       "port": "3306",
-      "user": "root",
-      "password": "123456",
+      "user": "koa",
+      "password": "qwertyuiop",
       "dateStrings": true
     }
   },
@@ -42,13 +42,13 @@
       "cookie": {
         "name": "thinkjs"
       },
-      "sessionPath": "C:\\koa-thinkjs\\runtime\\session"
+      "sessionPath": "/Users/wnn/Desktop/code/thinkjs/runtime/session"
     }
   },
   "view": {
     "type": "nunjucks",
     "nunjucks": {
-      "viewPath": "C:\\koa-thinkjs\\view",
+      "viewPath": "/Users/wnn/Desktop/code/thinkjs/view",
       "sep": "_",
       "extname": ".html"
     }
@@ -60,14 +60,14 @@
       "backups": 10,
       "absolute": true,
       "maxLogSize": 51200,
-      "filename": "C:\\koa-thinkjs\\logs\\app.log"
+      "filename": "/Users/wnn/Desktop/code/thinkjs/logs/app.log"
     },
     "dateFile": {
       "level": "ALL",
       "absolute": true,
       "pattern": "-yyyy-MM-dd",
       "alwaysIncludePattern": true,
-      "filename": "C:\\koa-thinkjs\\logs\\app.log"
+      "filename": "/Users/wnn/Desktop/code/thinkjs/logs/app.log"
     }
   }
 }
