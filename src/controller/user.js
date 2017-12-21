@@ -53,6 +53,34 @@ module.exports = class extends Base {
     return this.display();
   }
 
+  // 提交修改当前用户信息
+  async editAction() {
+
+      const name = await this.session('name')
+
+      var img = this.ctx.post().img;
+
+
+      console.log('--------')
+      console.log(img)
+
+      const affectedRows = await this.model('users').where({name: name}).update({headImg: img});
+
+      console.log(affectedRows)
+      console.log('--------')
+
+      if(affectedRows){
+        this.body = {
+          code : 0
+        }
+      }else {
+        this.body = {
+          code : -1
+        }
+      }
+
+  }
+
   // 用户信息注册
   async registeredAction(){
 

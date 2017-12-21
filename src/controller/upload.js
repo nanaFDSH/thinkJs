@@ -1,4 +1,6 @@
 const Base = require('./base.js');
+const toolUpload = require('./tool/upload');
+
 // 图片上传本地
 const fs = require('fs');
 const path = require('path');
@@ -70,56 +72,23 @@ module.exports = class extends Base {
 
     // 七牛上传-入库
     async localToQiniuAction() {
-
-        //image
-        var file = this.ctx.file('file')  // 获取file信息
-
-        let qconfig = this.config('qiniu');
-        var accessKey = qconfig.access_key;
-        var secretKey = qconfig.secret_key;
-
-        var config = new qiniu.conf.Config();
-        // 空间对应的机房
-        config.zone = qiniu.zone.Zone_z2;
-
-        // 生成mac算法实例
-        var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
-
-        // 生成上传凭证给web表单使用
-        var options = {
-            scope: qconfig.bucket,
-            returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}'
-        };
-        var putPolicy = new qiniu.rs.PutPolicy(options);
-        var uploadToken = putPolicy.uploadToken(mac);
-
-        var localFile = file.path;  //這裡要換
-        var formUploader = new qiniu.form_up.FormUploader(config);
-        var putExtra = new qiniu.form_up.PutExtra();
-        var key = file.name; //這裡也要換這是
-
+        var file = this.ctx.file('file');
         // 文件上传
-        formUploader.putFile(uploadToken, key, localFile, putExtra, function(respErr,respBody, respInfo) {
-            if (respErr) {
-                throw respErr;
+        const data = await toolUpload(file.name, file.path);
+        console.log(data);
+
+        if(data.key){
+            data.url = 'http://'+ this.config('qiniu').domain +'/'+ data.key;
+            this.body= {
+                code: 0,
+                data: data
             }
-            if (respInfo.statusCode == 200) {
-                console.log('+++++++++++++++++++++++++++++')
-                console.log(respBody.key);
-
-                const url = qconfig.domain +'/'+ respBody.key
-
-            } else {
-                console.log(respInfo.statusCode);
-                console.log(respBody);
+        }else{
+            this.body= {
+                code: -1,
+                data: data
             }
-
-            return url
-        });
-
-        console.log(url);
-        this.assign('imgUrl',url);
-        this.ctx.redirect('/upload/qnupload'); // 返回登录页
+        }
     }
 
 }

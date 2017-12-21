@@ -1,25 +1,30 @@
 {% extends "base.html" %} {% block main %}
 
-<script>
-    /** 提交表单上传图片 **/
-    function upload(){
-        $.post('http://upload.qiniu.com',{id:id},function(res){
-            if(res.code === '0') {
-
-            }
-        });
-    }
-</script>
+<script src="/static/js/upload/vendor/jquery.ui.widget.js"></script>
+<script src="/static/js/upload/jquery.iframe-transport.js"></script>
+<script src="/static/js/upload/jquery.fileupload.js"></script>
 
 七牛上传图片
 
-<form method="post" action="/upload/localToQiniu"
-      enctype="multipart/form-data">
-    <input name="token" type="hidden" value="{{uptoken}}">
-    <input name="file" type="file" />
-    <input type="submit">
-</form>
+<input id="fileupload" type="file" name="file" data-url="/upload/localToQiniu" multiple>
 
-<img src="{{imgUrl}}">
+<img id="img" style="display: none;">
+<p></p>
+
+<script>
+    $(function () {
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                if(data.result.code==0){
+                    $('#img').show();
+                    $('#img').attr('src',data.result.data.url+'?imageView2/1/w/200/h/200');
+                }else{
+                    $('p').text('文件上传失败');
+                }
+            }
+        });
+    });
+</script>
 
 {% endblock %}
