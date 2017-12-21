@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+        function changeCode(){
+            $('#imgCode').attr('src',"http://localhost:8360/code?"+Math.random());
+        }
+    </script>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <!-- Start Sign In Form -->
+            <form action="/user/registered" method="POST" class="fh5co-form animate-box" data-animate-effect="fadeIn">
+                <h2>欢迎注册</h2>
+                <div class="form-group">
+                    <label for="name" class="sr-only">Username</label>
+                    <input name="name" type="text" class="form-control" id="name" value="" placeholder="请输入用户名" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="sr-only">Password</label>
+                    <input name="password" type="password" class="form-control" id="password" value="" placeholder="请输入密码" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="r_password" class="sr-only">Password</label>
+                    <input name="r_password" type="password" class="form-control" id="r_password" value="" placeholder="请重复输入密码" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="code" class="sr-only">验证码</label>
+                    <input name="code" type="tel" maxlength="4" class="form-control form-code" id="code" placeholder="请输入验证码" autocomplete="off">
+                    <span class="form-code-img">
+                    <img id="imgCode" src="http://localhost:8360/code" onclick="changeCode()" />
+                </span>
+                </div>
+                <div id="errorMsg">{{errorMsg}}</div>
+                <div class="form-group">
+                    <input type="submit" value="注册" class="btn btn-primary btn-lg btn-block">
+                </div>
+            </form>
+            <!-- END Sign In Form -->
+        </div>
+    </div>
+</div>
+
+</html>

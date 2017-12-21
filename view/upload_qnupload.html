@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block main %}
+
+<script>
+    /** 提交表单上传图片 **/
+    function upload(){
+        $.post('http://upload.qiniu.com',{id:id},function(res){
+            if(res.code === '0') {
+
+            }
+        });
+    }
+</script>
+
+七牛上传图片
+
+<form method="post" action="/upload/localToQiniu"
+      enctype="multipart/form-data">
+    <input name="token" type="hidden" value="{{uptoken}}">
+    <input name="file" type="file" />
+    <input type="submit">
+</form>
+
+<img src="{{imgUrl}}">
+
+{% endblock %}

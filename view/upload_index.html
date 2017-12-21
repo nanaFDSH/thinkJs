@@ -1,4 +1,9 @@
 {% extends "base.html" %} {% block main %}
+
 上传图片
-<input type="file">
+<form action="upload/upload" enctype="multipart/form-data" method="POST">
+    <input type="file" name="image">
+    <input type="submit" value="提交">
+</form>
+
 {% endblock %}

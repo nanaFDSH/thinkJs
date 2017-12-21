@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "captchapng": "0.0.1",
+    "fs": "0.0.1-security",
+    "qiniu": "^7.1.1",
     "think-cache": "^1.0.0",
     "think-cache-file": "^1.0.8",
     "think-cache-redis": "^1.1.2",

@@ -54,7 +54,55 @@ module.exports = class extends Base {
   }
 
   // 用户信息注册
-  async registered(){
+  async registeredAction(){
 
+    if (this.method == 'GET') {
+
+      return this.display();
+
+    } else {
+
+      // 获取验证码
+      const code = await this.session('code')
+
+      // 验证码输入不正确
+      if (this.ctx.request.body.post.code != code) {
+        this.assign('errorMsg', '验证码错误');
+        this.display();
+      } else {
+        var
+            name = this.ctx.request.body.post.name,
+            password = this.ctx.request.body.post.password,
+            r_password = this.ctx.request.body.post.r_password;
+
+        let User = this.model('users');
+
+        let data = await  User.where({name: name}).find();
+
+        // 如果名字不存在
+        if (think.isEmpty(data)) {
+          // 内容为空时的处理
+
+          if (password === r_password) {
+            let insertId = await User.add({
+                name: name,
+                password: password,
+                headImg: 'http://img1.hijs.cc/B924B4A0-AFF1-41B7-9D57-C0BD290562C2.png?imageView2/0/w/250/h/240'
+            });
+
+            console.log(insertId)
+            this.ctx.redirect('/user/login'); // 返回登录页
+          } else {
+            this.assign('errorMsg', '重复输入密码错误');
+            this.display();
+          }
+
+        } else {
+          this.assign('errorMsg', '该名字已经注册');
+          this.display();
+        }
+      }
+    }
   }
+
 };

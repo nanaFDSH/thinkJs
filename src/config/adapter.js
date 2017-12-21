@@ -44,7 +44,7 @@ exports.model = {
         user: 'koa',
         password: 'qwertyuiop',
         dateStrings: true,
-    },
+    }
 };
 
 // mongo  ˝æ›ø‚≈‰÷√
@@ -124,3 +124,4 @@ exports.logger = {
         filename: path.join(think.ROOT_PATH, 'logs/app.log')
     }
 };
+
