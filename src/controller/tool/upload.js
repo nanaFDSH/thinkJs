@@ -1,4 +1,4 @@
-// 七牛
+// 七牛 封装的上传方法
 const qiniu = require('qiniu');
 const appConfig=require('../../config/config.js');
 

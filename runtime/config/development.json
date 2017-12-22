@@ -48,13 +48,13 @@
       "cookie": {
         "name": "thinkjs"
       },
-      "sessionPath": "/Users/wnn/Desktop/code/thinkjs/runtime/session"
+      "sessionPath": "E:\\www\\gitthinkjs\\runtime\\session"
     }
   },
   "view": {
     "type": "nunjucks",
     "nunjucks": {
-      "viewPath": "/Users/wnn/Desktop/code/thinkjs/view",
+      "viewPath": "E:\\www\\gitthinkjs\\view",
       "sep": "_",
       "extname": ".html"
     }
@@ -66,14 +66,14 @@
       "backups": 10,
       "absolute": true,
       "maxLogSize": 51200,
-      "filename": "/Users/wnn/Desktop/code/thinkjs/logs/app.log"
+      "filename": "E:\\www\\gitthinkjs\\logs\\app.log"
     },
     "dateFile": {
       "level": "ALL",
       "absolute": true,
       "pattern": "-yyyy-MM-dd",
       "alwaysIncludePattern": true,
-      "filename": "/Users/wnn/Desktop/code/thinkjs/logs/app.log"
+      "filename": "E:\\www\\gitthinkjs\\logs\\app.log"
     }
   }
 }

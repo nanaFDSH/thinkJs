@@ -17,7 +17,7 @@ module.exports = class extends Base {
     // 删除某条数据
     async deleteAction()
     {
-        var id = this.ctx.request.body.post.id
+        var id = this.ctx.post().id
         // 如果当前session为undefine 重新登录
         const sess_name = await this.session('name');
         if(typeof sess_name == 'undefined'){
@@ -36,7 +36,7 @@ module.exports = class extends Base {
     // 添加数据
     async addAction()
     {
-        var user = this.ctx.request.body.post
+        var user = this.ctx.post()
 
         const list = this.model('list'); // controller 里实例化模型
         const data = await list.add(user);
@@ -48,7 +48,7 @@ module.exports = class extends Base {
     // 修改数据
     async updateAction()
     {
-        var id = this.ctx.request.body.post.id
+        var id = this.ctx.post().id
 
         const data = await this.model('list').where({id:id}).select();
         console.log(data)
@@ -60,7 +60,7 @@ module.exports = class extends Base {
 
     async submitUpdateAction()
     {
-        var user = this.ctx.request.body.post
+        var user = this.ctx.post()
         console.log(user)
         const data = await  this.model('list').where({id: user.id}).update(user);
         this.body = {

@@ -12,13 +12,13 @@ module.exports = class extends Base {
       // 获取存储的验证码
       const code = await this.session('code');
 
-      if(this.ctx.request.body.post.code != code){
+      if(this.ctx.post().code != code){
         this.assign('errorMsg','验证码错误');
         this.display();
       }else{
         var
-            name = this.ctx.request.body.post.name || '',
-            password = this.ctx.request.body.post.password || '';
+            name = this.ctx.post().name || '',
+            password = this.ctx.post().password || '';
 
         let res = await this.model('users').where({name: name,password:password}).select();
 
@@ -58,17 +58,11 @@ module.exports = class extends Base {
 
       const name = await this.session('name')
 
-      var img = this.ctx.post().img;
-
-
-      console.log('--------')
-      console.log(img)
+      const img = this.ctx.post().img;
 
       const affectedRows = await this.model('users').where({name: name}).update({headImg: img});
 
-      console.log(affectedRows)
-      console.log('--------')
-
+      // affectedRows 被修改的行数
       if(affectedRows){
         this.body = {
           code : 0
@@ -94,14 +88,14 @@ module.exports = class extends Base {
       const code = await this.session('code')
 
       // 验证码输入不正确
-      if (this.ctx.request.body.post.code != code) {
+      if (this.ctx.post().code != code) {
         this.assign('errorMsg', '验证码错误');
         this.display();
       } else {
         var
-            name = this.ctx.request.body.post.name,
-            password = this.ctx.request.body.post.password,
-            r_password = this.ctx.request.body.post.r_password;
+            name = this.ctx.post().name,
+            password = this.ctx.post().password,
+            r_password = this.ctx.post().r_password;
 
         let User = this.model('users');
 
