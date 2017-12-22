@@ -4,21 +4,39 @@
 <script src="/static/js/upload/jquery.iframe-transport.js"></script>
 <script src="/static/js/upload/jquery.fileupload.js"></script>
 
-七牛上传图片
+<div class="container">
+    <div class="images">
+        <div class="add_img_box">
+            <div class="add_image" style="border: 1px solid;">
+                <input id="fileupload" type="file" name="file" class="upload" data-url="/upload/localToQiniu" multiple>
+                <img style="display: none;" class="img_show">
+            </div>
+            <p>七牛上传图片</p>
+        </div>
+    </div>
 
-<input id="fileupload" type="file" name="file" data-url="/upload/localToQiniu" multiple>
-
-<img id="img" style="display: none;">
-<p></p>
+    <p class="msg-error"></p>
+</div>
 
 <script>
     $(function () {
+        // 数组上传需要指定id
+        // var addImg = '<div class="add_img_box">\n' +
+        //     '        <div class="add_image" style="border: 1px solid;">\n' +
+        //     '            <input id="fileupload" type="file" name="file" class="upload" data-url="/upload/localToQiniu" multiple>\n' +
+        //     '            <img style="display: none;" class="img_show">\n' +
+        //     '        </div>\n' +
+        //     '        <p>七牛上传图片</p>\n' +
+        //     '    </div>'
+
         $('#fileupload').fileupload({
             dataType: 'json',
             done: function (e, data) {
                 if(data.result.code==0){
-                    $('#img').show();
-                    $('#img').attr('src',data.result.data.url+'?imageView2/1/w/200/h/200');
+                    $('.img_show').show();
+                    $('.img_show').attr('src',data.result.data.url);
+
+                    // $('.images').append(addImg)
                 }else{
                     $('p').text('文件上传失败');
                 }

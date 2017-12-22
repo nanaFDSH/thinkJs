@@ -1,9 +1,13 @@
 {% extends "base.html" %} {% block main %}
 
-上传图片
-<form action="upload/upload" enctype="multipart/form-data" method="POST">
-    <input type="file" name="image">
-    <input type="submit" value="提交">
+<form action="/upload/index" enctype="multipart/form-data" method="POST">
+    <div class="images">
+        <div class="add_img_box">
+            <div class="add_image" style="border: 1px solid;">
+                <input type="file" name="image" class="upload">
+            </div>
+            <p> <input class="btn btn-info" type="submit" value="{{msg}}"></p>
+        </div>
+    </div>
 </form>
-
 {% endblock %}
