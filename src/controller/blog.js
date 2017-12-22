@@ -1,11 +1,11 @@
 const Base = require('./base.js');
 
 module.exports = class extends think.Controller {
-    async indexAction() {
-        const mongo = this.model('mongo'); // controller ÀïÊµÀý»¯Ä£ÐÍ
-        let data = await mongo.select();
-        this.assign('data', data); //¸øÄ£°å¸³Öµ
+  async indexAction() {
+    const mongo = this.model('mongo'); // controller ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+    const data = await mongo.select();
+    this.assign('data', data); // ï¿½ï¿½Ä£ï¿½å¸³Öµ
 
-        return this.display();
-    }
-}
+    return this.display();
+  }
+};

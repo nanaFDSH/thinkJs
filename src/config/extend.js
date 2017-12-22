@@ -5,9 +5,9 @@ const session = require('think-session');
 const mongo = require('think-mongo');
 
 module.exports = [
-    view, // make application support view
-    model(think.app),
-    mongo(think.app), // ÈÃ¿ò¼ÜÖ§³ÖÄ£ÐÍµÄ¹¦ÄÜ
-    cache,      // »º´æ
-    session    // session ÑéÖ¤ÊÇ·ñµÇÂ½
+  view, // make application support view
+  model(think.app),
+  mongo(think.app), // ï¿½Ã¿ï¿½ï¿½Ö§ï¿½ï¿½Ä£ï¿½ÍµÄ¹ï¿½ï¿½ï¿½
+  cache, // ï¿½ï¿½ï¿½ï¿½
+  session // session ï¿½ï¿½Ö¤ï¿½Ç·ï¿½ï¿½Â½
 ];
