@@ -6,5 +6,10 @@ module.exports = {
     secret_key: 'A3dKBs48OgXqRKBlJFfilpatmtJxpZU_nL1Y3EBn',
     bucket: 'lxjcxj',
     domain: 'img1.hijs.cc'
+  },
+  ai: {
+      api_key: 'v8Mjs1DGk3aofYHsGwp2eOBi',
+      secret_key: 'ELME2biIsLqDKo7ZqPR6Z7NH4lBFewGm',
+      app_id: '10575963',
   }
 };

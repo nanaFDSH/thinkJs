@@ -16,6 +16,7 @@ header{
 }
 .aside{
     width: 230px;
+    min-width: 230px;
     min-height: 100%;
     border-right: 1px solid #ddd;
 }
