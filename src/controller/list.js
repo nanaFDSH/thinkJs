@@ -35,7 +35,7 @@ module.exports = class extends Base {
 
   // 添加数据
   async addAction() {
-    var user = this.ctx.post();
+    const user = this.ctx.post();
 
     const list = this.model('list'); // controller 里实例化模型
     const data = await list.add(user);

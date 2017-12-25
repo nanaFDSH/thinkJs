@@ -10,7 +10,6 @@ module.exports = class extends Base {
       const code = await this.session('code');
 
       if (parseInt(this.ctx.post().code) === code) {
-
         const name = this.ctx.post().name || '';
         const password = this.ctx.post().password || '';
 
@@ -43,6 +42,7 @@ module.exports = class extends Base {
   async messageAction() {
     const name = await this.session('name');
     const data = await this.model('users').where({name: name}).select();
+
     this.assign('data', data[0]); // 给模板赋值
     return this.display();
   }
