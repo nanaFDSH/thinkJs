@@ -2,7 +2,7 @@ module.exports = class extends think.Controller {
   async __before() {
 
     // 如果当前session为undefine 重新登录
-    const let = await this.session('name');
+    let sessName = await this.session('name');
 
     if (typeof sessName === 'undefined') {
       this.assign('isLogin', '0'); // 给模板赋值
