@@ -2,8 +2,7 @@
 const qiniu = require('qiniu');
 const appConfig = require('../../config/config.js');
 
-/**
- *
+/** *
  * @param filename 文件名
  * @param localFile 文件路径
  * @param putExtra

@@ -7,7 +7,7 @@ const mongo = require('think-mongo');
 module.exports = [
   view, // make application support view
   model(think.app),
-  mongo(think.app), // �ÿ��֧��ģ�͵Ĺ���
-  cache, // ����
-  session // session ��֤�Ƿ��½
+  mongo(think.app), // mogo引用
+  cache, // 缓存
+  session // session
 ];
