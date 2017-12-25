@@ -1,7 +1,7 @@
 const redisCache = require('think-cache-redis');
 const nunjucks = require('think-view-nunjucks');
 const fileSession = require('think-session-file');
-const mysql = require('think-model-mysql'); // mysql ���ݿ�
+const mysql = require('think-model-mysql'); // mysql
 const {Console, File, DateFile} = require('think-logger3');
 const path = require('path');
 const isDev = think.env === 'development';
@@ -24,7 +24,7 @@ exports.cache = {
 };
 
 /**
- * model adapter config mysql���ݿ�����
+ * model adapter config mysql
  * @type {Object}
  */
 exports.model = {
@@ -47,19 +47,19 @@ exports.model = {
   }
 };
 
-// mongo ���ݿ�����
+// mongo
 // exports.model = {
-//  type: 'mongo', // Ĭ��ʹ�õ����ͣ�����ʱ����ָ�������л�
-//  common: { // ͨ������
-//    logConnect: true, // �Ƿ��ӡ���ݿ�������Ϣ
-//    logger: msg => think.logger.info(msg) // ��ӡ��Ϣ�� logger
+//  type: 'mongo',
+//  common: {
+//    logConnect: true,
+//    logger: msg => think.logger.info(msg)
 //  },
 //  mongo: {
 //    host: '127.0.0.1',
 //    port: 27017,
 //    user: '',
 //    password: '',
-//    database: 'koa', // ���ݿ�����
+//    database: 'koa',
 //    options: ''
 //  }
 // }

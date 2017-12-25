@@ -1,11 +1,12 @@
-const Base = require('./base.js');
-
+// 实例化模型类，获取配置后调用 think.model 方法，多模块项目下会获取当前模块下的配置。
 module.exports = class extends think.Controller {
   async indexAction() {
-    const mongo = this.model('mongo'); // controller ��ʵ����ģ��
-    const data = await mongo.select();
-    this.assign('data', data); // ��ģ�帳ֵ
 
+    let mogo = this.model('mongo')   // controller 里实例化模型
+    // 数据库查询
+    let data = await mogo.select();
+
+    this.assign('data', data);
     return this.display();
   }
 };
