@@ -5,9 +5,7 @@
     <title>注册页面</title>
     <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.js"></script>
-
-    <!--<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>-->
-    <!--<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>-->
+    <script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.js"></script>
 
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -27,8 +25,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <!-- Start Sign In Form -->
-            <form id="myform" action="/user/registered" method="POST" class="fh5co-form animate-box"
-                  data-animate-effect="fadeIn">
+            <form id="myform" action="/user/registered" method="post" class="fh5co-form animate-box" data-animate-effect="fadeIn">
                 <h2>欢迎注册</h2>
                 <div class="form-group">
                     <label for="name" class="sr-only">Username</label>
@@ -53,9 +50,9 @@
                     <img id="imgCode" src="http://localhost:8360/code" onclick="changeCode()"/>
                 </span>
                 </div>
-                <div id="errorMsg">{{errorMsg}}</div>
+                <div id="errorMsg"></div>
                 <div class="form-group">
-                    <input type="submit" value="注册" class="btn btn-primary btn-lg btn-block">
+                    <input id="submit" type="submit" value="注册" class="btn btn-primary btn-lg btn-block">
                 </div>
             </form>
             <!-- END Sign In Form -->
@@ -95,6 +92,22 @@
                 r_password: {
                     required: "确认密码不能为空！", equalTo: "确认密码和密码不一致！"
                 }
+            },
+            submitHandler: function(form) {
+                // some other code
+                // maybe disabling submit button
+                // then:
+                //当前的form通过ajax方式提交（用到jQuery.Form文件）
+                $(form).ajaxSubmit({
+                    dataType:"json",
+                    success:function( jsondata ){
+                        if( jsondata.code == '0' ){
+                            window.location.href = '/user/login'
+                        }else{
+                            alert(code.msg);
+                        }
+                    }
+                });
             }
         });
     });
