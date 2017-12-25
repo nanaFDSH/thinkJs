@@ -14,11 +14,11 @@ module.exports = class extends Base {
 
     if(this.method === 'POST'){
 
-        var file = this.ctx.file('image'); // 获取file信息
+        let file = this.ctx.file('image'); // 获取file信息
 
-        const reader = fs.createReadStream(file.path); // 要被拷贝的源文件
+        let reader = fs.createReadStream(file.path); // 要被拷贝的源文件
 
-        const stream = fs.createWriteStream(path.join(__dirname + '/../../www/static/upload', file.name)); // 写入数据位置，名字
+        let stream = fs.createWriteStream(path.join(__dirname + '/../../www/static/upload', file.name)); // 写入数据位置，名字
 
         reader.pipe(stream); // 文件被添加到 uploadImg文件夹
 
@@ -44,15 +44,17 @@ module.exports = class extends Base {
 
   // 七牛上传-页
   async qnuploadAction() {
+
     this.assign('title', '七牛图片上传');
     return this.display();
   }
 
   // 七牛上传-入库
   async localToQiniuAction() {
-    var file = this.ctx.file('file');
-    // 文件上传
-    var data = await toolUpload(file.name, file.path);
+
+    let file = this.ctx.file('file');
+
+    let data = await toolUpload(file.name, file.path);  // 文件上传
 
     if (data.key) {
 
