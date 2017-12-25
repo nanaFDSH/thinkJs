@@ -121,4 +121,20 @@ module.exports = class extends Base {
       }
     }
   }
+
+  // 用户信息验证
+  async checkNameAction() {
+
+    let name = this.ctx.post().name
+    let data = await this.model('users').where({name: name}).select();
+
+    if (think.isEmpty(data)) {
+        // 内容为空时的处理
+        this.body = true
+    }else {
+        this.body = false
+    }
+
+  }
+
 };
