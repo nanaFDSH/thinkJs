@@ -26,12 +26,12 @@ module.exports = function(filename, localFile) {
       scope: qconfig.bucket,
       returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}'
     };
-    const putPolicy = new qiniu.rs.PutPolicy(options);
-    const uploadToken = putPolicy.uploadToken(mac);
+    var putPolicy = new qiniu.rs.PutPolicy(options);
+    var uploadToken = putPolicy.uploadToken(mac);
 
     // var localFile = file.path;  //這裡要換
-    const formUploader = new qiniu.form_up.FormUploader(config);
-    const putExtra = new qiniu.form_up.PutExtra();
+    var formUploader = new qiniu.form_up.FormUploader(config);
+    var putExtra = new qiniu.form_up.PutExtra();
     formUploader.putFile(uploadToken, filename, localFile, putExtra, function(respErr, respBody, respInfo) {
       if (respErr) {
         // throw respErr;

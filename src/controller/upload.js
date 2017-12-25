@@ -11,31 +11,35 @@ const qiniu = require('qiniu');
 module.exports = class extends Base {
   // 打开图片上传页面
   async indexAction() {
-    if (this.method === 'POST') {
-      const file = this.ctx.file('image'); // 获取file信息
 
-      const reader = fs.createReadStream(file.path); // 要被拷贝的源文件
+    if(this.method === 'POST'){
 
-      const stream = fs.createWriteStream(path.join(__dirname + '/../../www/static/upload', file.name)); // 写入数据位置，名字
+        var file = this.ctx.file('image'); // 获取file信息
 
-      reader.pipe(stream); // 文件被添加到 uploadImg文件夹
+        const reader = fs.createReadStream(file.path); // 要被拷贝的源文件
 
-      file.path = __dirname + '/../../www/static/upload' + file.name;
+        const stream = fs.createWriteStream(path.join(__dirname + '/../../www/static/upload', file.name)); // 写入数据位置，名字
 
-      this.assign('fileInfo', '/static/upload' + file.name);
+        reader.pipe(stream); // 文件被添加到 uploadImg文件夹
 
-      this.assign({
-        'msg': '上传图片成功'
-      });
+        file.path = __dirname + '/../../www/static/upload' + file.name;
 
-      return this.display();
-    } else {
-      this.assign({
-        'title': '图片上传到本地',
-        'msg': '上传图片'
-      });
-      return this.display();
+        this.assign('fileInfo', '/static/upload' + file.name);
+
+        this.assign({
+            'msg':'上传图片成功'
+        });
+
+        return this.display();
+    }else {
+
+        this.assign({
+            'title': '图片上传到本地',
+            'msg':'上传图片'
+        });
+        return this.display();
     }
+
   }
 
   // 七牛上传-页
@@ -51,7 +55,8 @@ module.exports = class extends Base {
     var data = await toolUpload(file.name, file.path);
 
     if (data.key) {
-      data.url = 'http://' + this.config('qiniu').domain + '/' + data.key; // 回传
+
+      data.url = 'http://' + this.config('qiniu').domain + '/' + data.key // 回传
 
       this.body = {
         code: 0,
