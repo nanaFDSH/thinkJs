@@ -32,7 +32,7 @@ module.exports = class extends Base {
         file.path = __dirname + '/../../www/static/upload' + file.name;
 
         let data = {}
-        data.url = '/static/upload' + file.name
+        data.url = '/static/upload/' + file.name
 
         this.body = {
             code: 0,
