@@ -14,7 +14,10 @@
 <body>
 <div class="content">
     <header>
-        <div class="logo"><a href="https://github.com/nanaFDSH/thinkJs">thinkJs</a></div>
+        <div class="logo">
+            <span id="toggle" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            <a href="https://github.com/nanaFDSH/thinkJs">thinkJs</a>
+        </div>
         <div class="user-info">
             {% if isLogin == 0 %}
             <a href="/user/registered">注册</a>
@@ -42,5 +45,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+       $('#toggle').click(function () {
+           console.log($('.aside').css('display'))
+           if($('.aside').css('display') == 'none'){
+               $('.aside').css('display','block')
+               $('.aside').addClass('collapse')
+           }else {
+               $('.aside').css('display','none')
+               $('.aside').removeClass('collapse')
+           }
+       })
+    });
+</script>
 </body>
 </html>

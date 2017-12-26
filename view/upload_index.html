@@ -1,21 +1,35 @@
 {% extends "base.html" %} {% block main %}
 
-<form action="/upload/index" enctype="multipart/form-data" method="POST">
-</form>
+<script src="/static/js/upload/vendor/jquery.ui.widget.js"></script>
+<script src="/static/js/upload/jquery.iframe-transport.js"></script>
+<script src="/static/js/upload/jquery.fileupload.js"></script>
 
+<div class="container">
+    <div class="images">
+        <div class="add_img_box">
+            <div class="add_image" style="border: 1px solid;">
+                <input id="imgUpload" type="file" name="image" class="upload" data-url="/upload/bdupload" multiple>
+            </div>
 
-
-<div class="images">
-    <div class="add_img_box">
-        <div class="add_image" style="border: 1px solid;">
-            <input type="file" name="image" class="upload">
+            <p>上传图片</p>
         </div>
-        <p> <input class="btn btn-info" type="submit" value="{{msg}}"></p>
     </div>
 </div>
 
 <script>
-
+    $(function () {
+        $('#imgUpload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                if(data.result.code==0){
+                    // $('.img_show').show();
+                    $('#imgUpload').attr('src',data.url);
+                }else{
+                    $('p').text('文件上传失败');
+                }
+            }
+        });
+    });
 </script>
 
 {% endblock %}

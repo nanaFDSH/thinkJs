@@ -82,7 +82,7 @@
             <td>{{ user.english }}</td>
             <td>{{ user.score }}</td>
             <td>{{ user.mobile }}</td>
-            <td>
+            <td id="{{user.id}}">
                 <button class="btn btn-info" onclick="update({{user.id}})">编辑</button>
                 <button class="btn btn-danger" onclick="userDelete({{user.id}})">删除</button>
             </td>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" onclick="add()">确认添加</button>
+                    <button type="button" class="btn btn-primary" id="add">确认添加</button>
                 </div>
             </div>
         </div>
@@ -263,7 +263,7 @@
 <script>
     $(function(){
         // 添加
-        function add(){
+        $('#add').click(function () {
             var user = {
                 name: $('#u_name').val(),
                 mathematics: $('#u_math').val(),
@@ -279,7 +279,7 @@
                     location.reload()
                 }
             });
-        }
+        })
     });
 </script>
 {% endblock %}

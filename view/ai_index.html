@@ -1,11 +1,11 @@
 {% extends "base.html" %} {% block main %}
 
-<link rel="stylesheet" href="/static/css/article.css">
-
 <div class="container">
-    <input type="text" id="text">
-    <button id="speak">说话</button>
-    <audio style="display:none;" id="audio" src="" controls="controls"></audio>
+    <div class="ai-con">
+        <input type="text" id="text">
+        <button id="speak">说话</button>
+        <audio style="display:none;" id="audio" src="" controls="controls"></audio>
+    </div>
 </div>
 
 <script>
