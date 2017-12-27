@@ -25,7 +25,7 @@ module.exports = class extends Base {
         let stream = fs.createWriteStream(path.join(__dirname + '/../../www/static/upload', file.name)); // 写入数据位置，名字
 
         reader.pipe(stream); // 文件被添加到 uploadImg文件夹
-        file.path = __dirname + '/../../www/static/upload' + file.name;
+        file.path = __dirname + '/../../www/static/upload/' + file.name;
 
         let data = {};
         data.url = '/static/upload' + file.name;
