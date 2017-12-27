@@ -3,7 +3,6 @@ const Base = require('./base.js');
 module.exports = class extends Base {
   // 获取列表接口
   async listAction() {
-
     let user = this.model('list'); // controller 里实例化模型
     let data = await user.page(this.get('page')).countSelect({}, true);
 
@@ -15,11 +14,8 @@ module.exports = class extends Base {
 
   // 删除某条数据
   async deleteAction() {
-
     let id = this.ctx.post().id;
-
-    // 如果当前session为undefine 重新登录
-    let sessName = await this.session('name');
+    let sessName = await this.session('name');  // 如果当前session为undefine 重新登录
 
     if (typeof sessName === 'undefined') {
       this.body = {
@@ -37,9 +33,7 @@ module.exports = class extends Base {
 
   // 添加数据
   async addAction() {
-
     let user = this.ctx.post();
-
     let list = this.model('list'); // controller 里实例化模型
     let data = await list.add(user);
 
@@ -50,9 +44,7 @@ module.exports = class extends Base {
 
   // 修改数据
   async updateAction() {
-
     let id = this.ctx.post().id;
-
     let data = await this.model('list').where({id: id}).select();
 
     this.body = {
@@ -62,9 +54,7 @@ module.exports = class extends Base {
   }
 
   async submitUpdateAction() {
-
     let user = this.ctx.post();
-
     let data = await this.model('list').where({id: user.id}).update(user);
 
     this.body = {
