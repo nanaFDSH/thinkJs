@@ -1,6 +1,7 @@
 const Base = require('./base.js');
 const fs = require('fs');
 const IdCard = require('./tool/aiIcard')
+const path = require('path');
 
 module.exports = class extends Base {
 
@@ -9,6 +10,7 @@ module.exports = class extends Base {
         return this.display();
     }
 
+    // 文字转语音
     async speakAction(){
         let AipSpeechClient = require("baidu-aip-sdk").speech;
 
@@ -41,14 +43,28 @@ module.exports = class extends Base {
     // 身份证识别
     async recognizeAction(){
 
-        let image = fs.readFileSync(__dirname + "../../../www/static/upload/id1.jpg").toString("base64");
+        let file = this.ctx.file('idImage')  // 获取file的name
+
+        // 读取信息
+        let image = fs.readFileSync(file.path).toString("base64");
         let idCardSide = "front";  // front - 身份证正面 back - 身份证背面
         let options = {};    // 如果有可选参数
         options["detect_direction"] = "true";
         options["detect_risk"] = "false";
-
         let data = await IdCard.recognizeIdCard(image, idCardSide, options);
-        console.log(data)
-        this.body = data
+
+        if(think.isEmpty(data)){
+            this.body = {
+                code : -1
+            }
+        }else {
+            this.body = {
+                code : 0,
+                data:{
+                    imageUrl:image,
+                    idCardInfo:data
+                }
+            }
+        }
     }
 };

@@ -209,3 +209,8 @@ input.upload{
 .ai-con{
     margin: 30px 0;
 }
+
+.add_image_card{
+    width: 200px;
+    height: 100px;
+}

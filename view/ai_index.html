@@ -1,5 +1,10 @@
 {% extends "base.html" %} {% block main %}
 
+<!--文件上传-->
+<script src="/static/js/upload/vendor/jquery.ui.widget.js"></script>
+<script src="/static/js/upload/jquery.iframe-transport.js"></script>
+<script src="/static/js/upload/jquery.fileupload.js"></script>
+
 <div class="container">
     <div class="ai-con">
         <input type="text" id="text">
@@ -7,33 +12,55 @@
         <audio style="display:none;" id="audio" src="" controls="controls"></audio>
     </div>
 
-    <div>
-        <button id="recognize">身份证识别</button>
+    <div class="images">
+        <div class="add_img_box">
+            <div class="add_image add_image_card" style="border: 1px solid;">
+                <input id="idImage" type="file" name="idImage" class="upload" data-url="/ai/recognize" multiple>
+                <img class="img_show" src="" style="display: none">
+            </div>
+            <p>身份证识别</p>
+        </div>
     </div>
+    <div id="msg"></div>
 </div>
 
 <script>
     $(function () {
 
         $('#speak').click(function () {
-
             var text = $('#text').val()
 
-            $.post('/ai/speak',{'text':text},function () {
+            $.post('/ai/speak', {'text': text}, function () {
                 setTimeout(function () {
                     //var audio = document.getElementById("audio");
-                    $('#audio').attr('src','/static/audio/ai.mpVoice.mp3?='+ Math.random())
+                    $('#audio').attr('src', '/static/audio/ai.mpVoice.mp3?=' + Math.random())
                     $('#audio').get(0).play();
-                },2000)
+                }, 2000)
             })
         })
 
-        $('#recognize').click(function () {
+        $('#idImage').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                if (data.result.code == 0) {
+                    var idCardInfo = data.result.data.idCardInfo.words_result
+                    var msg = '';
 
-            $.post('/ai/recognize',{},function (res) {
-                console.log(res)
-            })
-        })
+                    $.each(idCardInfo, function (i, val) {
+                        console.log(i)
+                        console.log(val.words)
+                        msg += i +':'+ val.words +'<br/>'
+                    })
+                    $('#msg').html(msg)
+
+                    $('.img_show').show();
+                    $('.img_show').attr('src', "data:image/jpg;base64," + data.result.data.imageUrl);
+                } else {
+                    $('p').text('文件上传失败');
+                }
+            }
+        });
+
     });
 </script>
 {% endblock %}
