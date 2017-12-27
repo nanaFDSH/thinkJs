@@ -1,6 +1,7 @@
 const Base = require('./base.js');
 
 module.exports = class extends Base {
+
   // 获取列表接口
   async listAction() {
     let user = this.model('list'); // controller 里实例化模型
