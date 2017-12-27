@@ -15,7 +15,7 @@ let recognizeIdCard = function (image,idCardSide,options) {
 
         // 带参数调用身份证识别
         client.idcard(image, idCardSide, options).then(function(result) {
-            // console.log(JSON.stringify(result));
+            console.log(JSON.stringify(result));
             resolve(JSON.stringify(result))
         }).catch(function(err) {  // 如果发生网络错误
             // console.log(err);
