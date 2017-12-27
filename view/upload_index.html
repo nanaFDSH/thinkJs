@@ -11,6 +11,7 @@
                 <input id="imgUpload" type="file" name="image" class="upload" data-url="/upload/bdupload" multiple>
                 <img class="img_show" src="" style="display: none">
             </div>
+
             <p>上传图片</p>
         </div>
     </div>
@@ -23,7 +24,6 @@
             done: function (e, data) {
                 if(data.result.code==0){
                     $('.img_show').show();
-
                     $('.img_show').attr('src',data.result.data.url);
                 }else{
                     $('p').text('文件上传失败');

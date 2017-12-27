@@ -42,7 +42,7 @@ exports.model = {
     host: 'www.hijs.cc',
     port: '3306',
     user: 'koa',
-    password: 'qwertyuiop',
+    password: '8b87c7dbf8',
     dateStrings: true
   }
 };

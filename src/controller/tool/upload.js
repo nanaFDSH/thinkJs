@@ -11,7 +11,6 @@ const appConfig = require('../../config/config.js');
 module.exports = function(filename, localFile) {
 
   return new Promise(function(resolve, reject) {
-
     let qconfig = appConfig.qiniu;
     let accessKey = qconfig.access_key;
     let secretKey = qconfig.secret_key;

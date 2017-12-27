@@ -9,9 +9,9 @@ const path = require('path');
 const qiniu = require('qiniu');
 
 module.exports = class extends Base {
+
     // 打开图片上传页面
     async indexAction() {
-
         this.assign({
             'title': '图片上传到本地',
             'msg': '上传图片'
@@ -22,17 +22,14 @@ module.exports = class extends Base {
     // 图片上传到本地
     async bduploadAction() {
         let file = this.ctx.file('image'); // 获取file信息
-
         let reader = fs.createReadStream(file.path); // 要被拷贝的源文件
-
         let stream = fs.createWriteStream(path.join(__dirname + '/../../www/static/upload', file.name)); // 写入数据位置，名字
 
         reader.pipe(stream); // 文件被添加到 uploadImg文件夹
-
         file.path = __dirname + '/../../www/static/upload' + file.name;
 
-        let data = {}
-        data.url = '/static/upload/' + file.name
+        let data = {};
+        data.url = '/static/upload/' + file.name;
 
         this.body = {
             code: 0,
@@ -43,21 +40,18 @@ module.exports = class extends Base {
 
     // 七牛上传-页
     async qnuploadAction() {
-
         this.assign('title', '七牛图片上传');
         return this.display();
     }
 
     // 七牛上传-入库
     async localToQiniuAction() {
-
         let file = this.ctx.file('file');
-
         let data = await toolUpload(file.name, file.path);  // 文件上传
 
         if (data.key) {
 
-            data.url = 'http://' + this.config('qiniu').domain + '/' + data.key // 回传
+            data.url = 'http://' + this.config('qiniu').domain + '/' + data.key;  // 回传
 
             this.body = {
                 code: 0,

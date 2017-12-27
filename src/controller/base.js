@@ -1,6 +1,6 @@
 module.exports = class extends think.Controller {
-  async __before() {
 
+  async __before() {
     // 如果当前session为undefine 重新登录
     let sessName = await this.session('name');
 
