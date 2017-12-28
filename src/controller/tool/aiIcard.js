@@ -25,4 +25,4 @@ let recognizeIdCard = function (image,idCardSide,options) {
     });
 }
 
-module.exports.recognizeIdCard = recognizeIdCard;
+module.exports.recognizeIdCard = recognizeIdCard;  // 身份正识别

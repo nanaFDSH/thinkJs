@@ -4,63 +4,39 @@ module.exports = class extends Base {
 
     // 登录
     async loginAction() {
-        if (this.method === 'GET') {
-            return this.display();
-        } else if (this.method === 'POST') {
-            // 获取存储的验证码
-            let code = await this.session('code');
-
-            if (parseInt(this.ctx.post().code) === code) {
-
-                let name = this.ctx.post().name || '';
-                let password = this.ctx.post().password || '';
-                let res = await this.model('users').where({name: name, password: password}).select();
-
-                // 查不到数据 内容为空时的处理
-                if (think.isEmpty(res)) {
-                    this.assign('errorMsg', '用户名或密码错误');
-                    this.display();
-                } else {
-                    await this.session('name', name);
-                    this.ctx.redirect('/index/index'); // 重定向
-                }
-            } else {
-                this.assign('errorMsg', '验证码错误');
-                this.display();
-            }
-        }
-    }
-
-    // 退出登录
-    async logoutAction() {
-        await this.session(null);   // session cookie 均设置为空
-        await this.cookie('thinkjs', null);
-        this.ctx.redirect('/'); // 重定向
-    }
-
-    // 获取当前用户信息
-    async messageAction() {
-        let name = await this.session('name');
-        let data = await this.model('users').where({name: name}).select();
-        this.assign('data', data[0]); // 给模板赋值
         return this.display();
     }
 
-    // 提交修改当前用户信息
-    async editAction() {
-        let name = await this.session('name');
-        let img = this.ctx.post().img;
-        let affectedRows = await this.model('users').where({name: name}).update({headImg: img});
+    // 用户信息登录
+    async userloginAction(){
+        // 获取存储的验证码
+        let code = await this.session('code');
 
-        // affectedRows 被修改的行数
-        if (affectedRows) {
-            this.body = {
-                code: 0
-            };
+        if (parseInt(this.ctx.post().code) === code) {
+            let name = this.ctx.post().name || '';
+            let password = this.ctx.post().password || '';
+            let res = await this.model('users').where({name: name, password: password}).select();
+
+            // 查不到数据 内容为空时的处理
+            if (think.isEmpty(res)) {
+                this.body = {
+                    code: -1,
+                    msg: '用户名或密码错误'
+                }
+            } else {
+                await this.session('name', name);
+                const cookie = this.cookie('thinkjs');
+
+                this.body = {
+                    code: 0,
+                    msg: '登陆成功'
+                }
+            }
         } else {
             this.body = {
-                code: -1
-            };
+                code: -1,
+                msg: '验证码错误'
+            }
         }
     }
 
@@ -119,7 +95,7 @@ module.exports = class extends Base {
         }
     }
 
-    // 用户信息验证
+    // 注册用户名字信息验证
     async checkNameAction() {
         let name = this.ctx.post().name;
         let data = await this.model('users').where({name: name}).select();
@@ -130,6 +106,52 @@ module.exports = class extends Base {
         } else {
             this.body = false;
         }
-
     }
+
+    // 登录用户名字信息验证
+    async checkNameLogAction() {
+        let name = this.ctx.post().name;
+        let data = await this.model('users').where({name: name}).select();
+
+        if (think.isEmpty(data)) { // 不存在
+            // 内容为空时的处理
+            this.body = false;
+        } else {  // 存在
+            this.body = true;
+        }
+    }
+
+    // 退出登录
+    async logoutAction() {
+        await this.session(null);   // session cookie 均设置为空
+        await this.cookie('thinkjs', null);
+        this.ctx.redirect('/'); // 重定向
+    }
+
+    // 获取当前用户信息
+    async messageAction() {
+        let name = await this.session('name');
+        let data = await this.model('users').where({name: name}).select();
+        this.assign('data', data[0]); // 给模板赋值
+        return this.display();
+    }
+
+    // 提交修改当前用户信息
+    async editAction() {
+        let name = await this.session('name');
+        let img = this.ctx.post().img;
+        let affectedRows = await this.model('users').where({name: name}).update({headImg: img});
+
+        // affectedRows 被修改的行数
+        if (affectedRows) {
+            this.body = {
+                code: 0
+            };
+        } else {
+            this.body = {
+                code: -1
+            };
+        }
+    }
+
 };
