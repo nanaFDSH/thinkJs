@@ -14,10 +14,7 @@ module.exports = class extends Base {
         let imgbase64 = Buffer.from(img, 'base64');
 
         this.ctx.type = 'image/png';
-        this.body = {
-            code: 0,
-            img: imgbase64
-        };
+        this.body = imgbase64;
 
         await this.session('code', code); // session存储
     }
