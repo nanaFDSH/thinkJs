@@ -13,8 +13,8 @@ module.exports = class extends Base {
         let img = p.getBase64();
         let imgbase64 = Buffer.from(img, 'base64');
 
-        this.ctx.type = 'image/png';
-        this.body = imgbase64;
+        this.ctx.type = 'image/png';   // 显示图片格式
+        this.body = imgbase64;    // code 图片
 
         await this.session('code', code); // session存储
     }
