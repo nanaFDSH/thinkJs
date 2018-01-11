@@ -1,5 +1,6 @@
 // default config
 module.exports = {
+    port: 1234,
     workers: 1,
     qiniu: {
         access_key: 'X80vZ237Z3J758vym8_J887jLp9NCnZYxxEFWuaC',
