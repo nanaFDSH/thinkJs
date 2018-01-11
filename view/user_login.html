@@ -13,7 +13,7 @@
 
     <script>
         function changeCode(){
-            $('#imgCode').attr('src',"http://localhost:8360/code?"+Math.random());
+            $('#imgCode').attr('src',"/code?"+Math.random());
         }
     </script>
 <link rel="stylesheet" href="/static/css/styles.css">
@@ -38,7 +38,7 @@
                     <label for="code" class="sr-only">验证码</label>
                     <input name="code" type="tel" maxlength="4" class="form-control form-code" id="code" placeholder="请输入验证码" autocomplete="off">
                     <span class="form-code-img">
-                    <img id="imgCode" src="http://localhost:8360/code" onclick="changeCode()" />
+                    <img id="imgCode" src="/code" onclick="changeCode()" />
                 </span>
                 </div>
 
