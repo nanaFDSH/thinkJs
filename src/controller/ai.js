@@ -15,7 +15,7 @@ module.exports = class extends Base {
     async speakAction(){
         let text = this.ctx.post().text;
         let data = await aiVoice.textVoice(text);  // base64
-        let voice = fs.writeFileSync(__dirname + '../../../www/static/audio/'+'ai.mpVoice.mp3', data);
+        let voice = fs.writeFileSync(__dirname + '/../../www/static/audio/'+'ai.mpVoice.mp3', data);
     }
 
     // 身份证识别
