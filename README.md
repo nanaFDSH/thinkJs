@@ -1,6 +1,9 @@
 
 Application created by [ThinkJS](http://www.thinkjs.org)
 
+项目地址 http://thinkjs.hijs.cc/
+
+
 ## 页面功能
 
 1. 分数表的增加，删除，修改
