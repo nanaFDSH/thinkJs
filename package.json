@@ -9,7 +9,7 @@
     "lint-fix": "eslint --fix src/"
   },
   "dependencies": {
-    "baidu-aip-sdk": "^2.0.0",
+    "baidu-aip-sdk": "^2.0.3",
     "captchapng": "0.0.1",
     "fs": "0.0.1-security",
     "qiniu": "^7.1.1",
