@@ -190,7 +190,7 @@
 
     // The iframe transport returns the iframe content document as response.
     // The following adds converters from iframe to text, json, html, xml
-    // and script.
+    // and scripts.
     // Please note that the Content-Type for JSON responses has to be text/plain
     // or text/html, if the browser doesn't include application/json in the
     // Accept header, else IE will show a download dialog.

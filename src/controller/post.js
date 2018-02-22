@@ -1,8 +1,7 @@
 const Base = require('./base.js');
 
 module.exports = class extends Base {
-
-    async othersAction() {
-        return this.display();
-    }
+  async othersAction() {
+    return this.display();
+  }
 };

@@ -29,13 +29,9 @@
 
         $('#speak').click(function () {
             var text = $('#text').val()
-
             $.post('/ai/speak', {'text': text}, function () {
-                setTimeout(function () {
-                    //var audio = document.getElementById("audio");
-                    $('#audio').attr('src', '/static/audio/ai.mpVoice.mp3?=' + Math.random())
-                    $('#audio').get(0).play();
-                }, 2000)
+                $('#audio').attr('src', '/static/audio/ai.mpVoice.mp3?=' + Math.random())
+                $('#audio').get(0).play();
             })
         })
 
@@ -49,7 +45,7 @@
                     $.each(idCardInfo, function (i, val) {
                         console.log(i)
                         console.log(val.words)
-                        msg += i +':'+ val.words +'<br/>'
+                        msg += i + ':' + val.words + '<br/>'
                     })
                     $('#msg').html(msg)
 

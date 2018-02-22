@@ -1,7 +1,6 @@
 const Base = require('./base.js');
 
 module.exports = class extends think.Controller {
-
   // 设置readis
   async indexAction() {
     await this.cache('name', 'value', {
@@ -14,6 +13,6 @@ module.exports = class extends think.Controller {
 
   // 获取readis
   async getAction() {
-    let data = await this.cache('www');
+    const data = await this.cache('www');
   }
 };

@@ -72,7 +72,7 @@ exports.session = {
   type: 'file',
   common: {
     cookie: {
-      name: 'thinkjs'   // 对应cookie名字
+      name: 'thinkjs' // 对应cookie名字
       // keys: ['werwer', 'werwer'],
       // signed: true
     }

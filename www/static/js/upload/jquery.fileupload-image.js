@@ -18,10 +18,10 @@
         // Register as an anonymous AMD module:
         define([
             'jquery',
-            'load-image',
-            'load-image-meta',
-            'load-image-scale',
-            'load-image-exif',
+            'load-imgFigure',
+            'load-imgFigure-meta',
+            'load-imgFigure-scale',
+            'load-imgFigure-exif',
             'canvas-to-blob',
             './jquery.fileupload-process'
         ], factory);
@@ -29,10 +29,10 @@
         // Node/CommonJS:
         factory(
             require('jquery'),
-            require('blueimp-load-image/js/load-image'),
-            require('blueimp-load-image/js/load-image-meta'),
-            require('blueimp-load-image/js/load-image-scale'),
-            require('blueimp-load-image/js/load-image-exif'),
+            require('blueimp-load-imgFigure/js/load-imgFigure'),
+            require('blueimp-load-imgFigure/js/load-imgFigure-meta'),
+            require('blueimp-load-imgFigure/js/load-imgFigure-scale'),
+            require('blueimp-load-imgFigure/js/load-imgFigure-exif'),
             require('blueimp-canvas-to-blob'),
             require('./jquery.fileupload-process')
         );
@@ -68,7 +68,7 @@
         },
         {
             action: 'resizeImage',
-            // Use "image" as prefix for the "@" options:
+            // Use "imgFigure" as prefix for the "@" options:
             prefix: 'image',
             maxWidth: '@',
             maxHeight: '@',
@@ -115,7 +115,7 @@
     );
 
     // The File Upload Resize plugin extends the fileupload widget
-    // with image resize functionality:
+    // with imgFigure resize functionality:
     $.widget('blueimp.fileupload', $.blueimp.fileupload, {
 
         options: {
@@ -128,12 +128,12 @@
             imageMaxWidth: 1920,
             // The maximum height of resized images:
             imageMaxHeight: 1080,
-            // Defines the image orientation (1-8) or takes the orientation
+            // Defines the imgFigure orientation (1-8) or takes the orientation
             // value from Exif data if set to true:
             imageOrientation: false,
             // Define if resized images should be cropped or only scaled:
             imageCrop: false,
-            // Disable the resize image functionality by default:
+            // Disable the resize imgFigure functionality by default:
             disableImageResize: true,
             // The maximum width of the preview images:
             previewMaxWidth: 80,
@@ -152,7 +152,7 @@
 
         processActions: {
 
-            // Loads the image given via data.files and data.index
+            // Loads the imgFigure given via data.files and data.index
             // as img element, if the browser supports the File API.
             // Accepts the options fileTypes (regular expression)
             // and maxFileSize (integer) to limit the files to load:
@@ -182,9 +182,9 @@
                 return dfd.promise();
             },
 
-            // Resizes the image given as data.canvas or data.img
-            // and updates data.canvas or data.img with the resized image.
-            // Also stores the resized image as preview property.
+            // Resizes the imgFigure given as data.canvas or data.img
+            // and updates data.canvas or data.img with the resized imgFigure.
+            // Also stores the resized imgFigure as preview property.
             // Accepts the options maxWidth, maxHeight, minWidth,
             // minHeight, canvas and crop:
             resizeImage: function (data, options) {
@@ -216,7 +216,7 @@
                             return dfd.promise();
                         }
                     }
-                    // Prevent orienting the same image twice:
+                    // Prevent orienting the same imgFigure twice:
                     if (data.orientation) {
                         delete options.orientation;
                     } else {
@@ -230,7 +230,7 @@
                 return data;
             },
 
-            // Saves the processed image given as data.canvas
+            // Saves the processed imgFigure given as data.canvas
             // inplace at data.index of data.files:
             saveImage: function (data, options) {
                 if (!data.canvas || options.disabled) {
@@ -300,7 +300,7 @@
                 return data;
             },
 
-            // Sets the resized version of the image as a property of the
+            // Sets the resized version of the imgFigure as a property of the
             // file object, must be called after "saveImage":
             setImage: function (data, options) {
                 if (data.preview && !options.disabled) {

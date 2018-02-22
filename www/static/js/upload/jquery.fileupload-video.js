@@ -18,14 +18,14 @@
         // Register as an anonymous AMD module:
         define([
             'jquery',
-            'load-image',
+            'load-imgFigure',
             './jquery.fileupload-process'
         ], factory);
     } else if (typeof exports === 'object') {
         // Node/CommonJS:
         factory(
             require('jquery'),
-            require('blueimp-load-image/js/load-image'),
+            require('blueimp-load-imgFigure/js/load-imgFigure'),
             require('./jquery.fileupload-process')
         );
     } else {
